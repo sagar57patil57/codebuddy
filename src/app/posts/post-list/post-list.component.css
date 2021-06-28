@@ -1,0 +1,48 @@
+:host {
+  display: block;
+  margin-top: 1rem;
+}
+
+mat-spinner {
+  margin: auto;
+}
+
+mat-paginator {
+  margin-top: 1rem;
+}
+
+.info-text {
+  text-align: center;
+}
+
+.post-image {
+  width: 100%;
+}
+
+.post-image img {
+  width: 100%;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.font-12 {
+  font-size: 12px;
+}
+
+.font-10 {
+  font-size: 10px;
+}
+
+.custom-link {
+  padding: 0px 6px;
+  margin-top: 5px;
+  color: black;
+  text-decoration: underline;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.posted-at {
+  position: absolute;
+  right: 15px;
+  top: 53px;
+}

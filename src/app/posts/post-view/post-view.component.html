@@ -1,0 +1,48 @@
+<div class="container-mr">
+    <div class="row mb-20" *ngIf="showUpdate">
+        <div class="col-md-4">
+            <select class="form-control form-control-sm" (change)="setDropDownValue($event)">
+                <option value="pending">pending</option>
+                <option value="approved">approved</option>
+                <option value="rejected">rejected</option>
+            </select>
+            <p>current status: <span [ngStyle]="{ 'color': getStatusColor() }" class="font-weight-600">{{ post?.status }}</span></p>
+        </div>
+        <div class="col-md-3">
+            <button class="btn btn-sm btn-dark" (click)="updateStatus()">Update Status</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="comment-title">
+                <h3>{{ post?.title }}</h3>
+                <div>
+                    <!--<span *ngIf="!post?.likeCount" class="font-12 mr-10 first-like">Be the first One to like this editorial!!!</span>-->
+                    <button class="btn btn-outline-info btn-padding" (click)="like()">{{ post?.likeCount || 0 }} <i class="fa fa-heart"></i></button>
+                </div>
+            </div>
+            <span class="font-12">Posted by <span class="username">{{ postCreator ? postCreator.email : 'Anonymous' }}</span> on {{ getFormattedDate(post?.createdAt) }}</span>
+            <hr>
+            <p class="content" [innerHtml]="getCleanHtml(post?.content)"></p>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-12 font-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="cmt" class="font-16"><i>What do think about this editorial? leave your thoughts below...</i></label>
+                        <textarea class="form-control" id="cmt" rows="3" [(ngModel)]="content"></textarea>
+                        <br>
+                        <button type="button" class="btn btn-outline-secondary btn-padding" (click)="addComment()">Add a comment</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div *ngFor="let c of comments" class="bg-light">
+                <app-comment [comment]="c" [showDelete]="true" (deleteAComment)="deleteComment($event)"></app-comment>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+
+<div class="container-mr">
+  <div class="row">
+    <div class="col-md-7">
+      <ng-container *ngTemplateOutlet="editorials"></ng-container>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-4">
+      <ng-container *ngTemplateOutlet="contributorsList"></ng-container>
+    </div>
+  </div>
+</div>
+
+<ng-template #contributorsList>
+  <h4>Top Contributors</h4>
+  <hr>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let c of contributors">{{ c.post.email }}<a href="#" class="badge badge-dark float-right">{{ c.count }} editorials</a></li>
+  </ul>
+</ng-template>
+
+<ng-template #editorials>
+  <div *ngIf="posts.length > 0 && !isLoading">
+    <div>
+      <h4 class="mb-20">Editorials</h4>
+      <hr>
+      <ng-container *ngFor="let post of posts">
+        <div class="card mb-3">
+          <!--<img class="card-img-top" [src]="post.imagePath" [alt]="post.title">-->
+          <div class="card-body p-2">
+            <div class="pr-0 float-right" *ngIf="userIsAuthenticated && userId === post.creator">
+              <a class="card-link font-12" [routerLink]="['/edit', post.id]">EDIT</a>
+              <button class="btn font-12" (click)="onDelete(post.id)">DELETE</button>
+            </div>
+            <h5 class="card-title">{{ post.title }}</h5>
+            <span class="float-right" *ngIf="!showStatus">{{ post.status }}</span>
+            <hr class="m-0">
+            <a routerLink="/view/{{post.id}}" class="custom-link">Click to read...</a>
+            <span class="font-10 posted-at">Posted at {{ post.createdAt | date: 'dd/MM/yyyy' }}</span>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</ng-template>
+
+<mat-paginator [length]="totalPosts" [pageSize]="postsPerPage" [pageSizeOptions]="pageSizeOptions" 
+              (page)="onChangedPage($event)"
+              *ngIf="posts.length > 0"></mat-paginator>
+
+<p *ngIf="posts.length === 0 && !isLoading">No posts added yet!</p>

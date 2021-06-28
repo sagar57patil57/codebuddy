@@ -1,0 +1,16 @@
+<!-- Modal -->
+<div>
+
+</div>
+
+<div class="flex-col">
+    <div class="comment-title">
+        <span class="weight-600">{{ comment?.creatorName }}</span>
+        <span>post at {{ getFormattedDate(comment?.timeStamp) }}</span>
+    </div>
+    <div>{{ comment?.content }}</div>
+    <div class="flex-right">
+        <span (click)="delete()"><i class="fa fa-trash icon"></i>Delete</span>
+    </div>
+</div>
+<hr>

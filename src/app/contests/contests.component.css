@@ -1,0 +1,22 @@
+.site-name {
+    padding: 3px 7px;
+    font-size: 12px;
+    color: white;
+    border-radius: 3px;
+}
+
+.custom-link {
+    color: royalblue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.head-margin {
+    margin: 20px 10px;
+}
+
+.custom-plus {
+    border: 2px solid gray;
+    border-radius: 50%;
+    padding: 1px 3px;
+}

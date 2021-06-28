@@ -1,0 +1,24 @@
+language: node_js
+node_js:                #version
+    - "8"
+dist: trusty          #  distribution(dist) is the base image of Virtual machine
+                         that is going to be created for us on CI server
+services:             # these services are installed when above OS(dist) is downloaded i.e. after boot
+    - mongodb
+    - redis-server
+env:
+    - NODE_ENV=dev
+cache:                  #   caches files for future use. eg.node_modules
+                        # if express is downloaded once and in next commit lodash is added to package.json
+                        so express will be picked from cache and loadash will be downloaded and put inside cache for future use
+    directories:
+        - node_modules
+install:
+    - npm install
+    - npm run build
+script:                    #    where we install dependencies
+    - nohup npm run start &
+    #   & => runs the command (here, npm run start) in background
+    #   nohup => if parent terminal is closed child processes/terminal created by '&' should not be stopped
+    - sleep 3               #give time(3 sec) for server to start
+    - npm run test

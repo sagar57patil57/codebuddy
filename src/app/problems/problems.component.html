@@ -1,0 +1,98 @@
+<div class="container-mr">
+  <div class="spinner-border spinner-custom" role="status" *ngIf="isLoading">
+    <span class="sr-only">Loading...</span>
+  </div>
+  
+  <div class="flex">
+    <button data-toggle="collapse" data-target="#demo" class="btn btn-dark btn-sm btn-outline" (click)="showFilter=!showFilter">{{ showFilter ? 'Hide Filters' : 'Show Filters' }}</button>
+    <button class="btn btn-dark btn-sm btn-outline ml-10" (click)="sort()">sort by difficulty {{ sortType === 'dsc' ? '(Hard First)' : sortType === 'asc' ? '(Easy First)' : '' }}</button>
+    <button type="button" class="btn btn-sm btn-outline-secondary ml-10 float-right" data-toggle="modal" data-target="#exampleModalCenter">
+      Solve a random question!!!
+    </button>
+  </div>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Choose a category</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="problem" id="easyproblem"  (change)="questionTypeSelected('easy')" checked>
+            <label class="form-check-label" for="easyproblem">
+              Easy
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="problem" id="mediumproblem" (change)="questionTypeSelected('medium')">
+            <label class="form-check-label" for="mediumproblem">
+              Medium
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="problem" id="hardproblem" (change)="questionTypeSelected('hard')">
+            <label class="form-check-label" for="hardproblem">
+              Hard
+            </label>
+          </div>
+          <br><br>
+          <button class="btn btn-dark btn-sm btn-outline ml-10" (click)="generateRandomQuestion()">{{randomQuestionLoader?'Searching a problem for you...':'Find...'}}
+            <span *ngIf="randomQuestionLoader">
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <span class="sr-only">Loading...</span>
+            </span>
+          </button>
+  
+          <button  *ngIf="randomQuestion" (click)="getRandomProblemLink()" class="btn ml-10 btn-danger btn--danger--2">Solve Now</button>
+  
+          <p *ngIf="randomQuestion" class="mt-10">We found: <b>{{ randomQuestion?.name }}</b> - <span class="custom-link" (click)="addTodo(randomQuestion.contestId, randomQuestion.index, randomQuestion.name)">Add to todo</span></p>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="demo" class="collapse mr-top-20">
+    <select class="form-control form-control-sm" (change)="setDropDownValue($event)">
+        <option value="">all</option>
+        <ng-container *ngFor="let cat of categories">
+          <option value="{{ cat.value }}">{{ cat.title }}</option>
+        </ng-container>
+    </select>
+  </div>
+    
+  <div class="table-responsive">
+    <table class="table mr-top-20">
+      <thead>
+        <tr>
+          <th>Website</th>
+          <th>Name</th>
+          <th>Difficult</th>
+          <th>Tags</th>
+          <th>Link</th>
+          <th>Todo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pr of problems">
+          <td><span class="site-color">Codeforces</span></td>
+          <td>{{ pr.name }}</td>
+          <td>{{ pr.index }}</td>
+          <td>
+              <span class="badge badge-light">{{ pr.tags[0] }}</span>
+              <span class="badge badge-light" *ngIf="pr.tags && pr.tags.length > 1">{{ pr.tags[1] }}</span>
+              <span class="badge badge-light" *ngIf="pr.tags && pr.tags.length > 2">{{ pr.tags[2] }}</span>
+          </td>
+          <td (click)="getContestLink(pr.contestId, pr.index)"><span class="custom-link">open</span></td>
+          <td><button (click)="addTodo(pr.contestId, pr.index, pr.name)" class="btn btn-sm btn-danger btn--danger">Add</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

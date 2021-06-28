@@ -1,0 +1,14 @@
+<div class="container-mr">
+    <h4 class="mb-20">Gotta Solve 'em all</h4>
+
+    <ng-container *ngIf="!todos.length">
+        <div>
+            No Todos Added...
+        </div>
+        <p>Solve problems <a routerLink="/problems" class="custom-link">here</a></p>
+    </ng-container>
+
+    <div class="list-group" *ngFor="let todo of todos">
+        <div class="list-group-item"><span>{{ todo.problemName }}</span> <span class="float-r btn btn-sm btn-danger btn--danger ml-10" (click)="deleteTodo(todo._id)">Remove</span>  <span class="custom-link float-r mr-10" (click)="openLink(todo.problemLink)">Goto problem </span> </div>
+    </div>
+</div>

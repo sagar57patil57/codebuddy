@@ -1,0 +1,37 @@
+.spinner-custom {
+    position: absolute;
+    left: 50vw;
+    top: 40vh;
+}
+
+.site-color{
+    background-color:mediumpurple;
+    color: white;
+    border-radius: 3px;
+    padding: 4px;
+    font-size: 12px;
+}
+
+.custom-link {
+    color: royalblue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.mr-top-20 {
+    margin-top: 20px;
+}
+
+.ml-10 {
+    margin-left: 10px;
+}
+
+.btn--danger {
+    padding: 2px 8px;
+    font-size: 10px;
+}
+
+.btn--danger--2 {
+    padding: 5px ​17px;
+    font-size: 13px;
+}

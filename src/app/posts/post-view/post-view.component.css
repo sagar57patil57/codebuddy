@@ -1,0 +1,68 @@
+.font-12 {
+    font-size: 12px;
+}
+
+.font-16 {
+    font-size: 16px;
+}
+
+.username {
+    text-decoration: underline;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 10px 0px 10px;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.weight-600 {
+    font-weight: 600;
+}
+
+.comment-heading {
+    padding-top: 6px;
+}
+
+.comment-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-group .btn-padding {
+    padding: 0px 16px;
+}
+
+.mr-10 {
+    margin-right: 10px;
+}
+
+.first-like {
+    color: darkcyan;
+    border: 1px solid;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.flex-right {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.icon {
+    font-size: 16px;
+    margin-right: 6px;
+}
+
+.content {
+    word-break: break-all;
+}
+
+.font-weight-600 {
+    font-weight: 600;
+}

@@ -1,0 +1,28 @@
+<div class="container-mr">
+  <h3 class="head-margin">Contests</h3>
+  <p *ngIf="!contests.length">No Contests found</p>
+  <div class="table-responsive">
+    <table class="table mr-top-20" *ngIf="contests.length">
+      <thead>
+        <tr>
+          <th>Website</th>
+          <th>Name</th>
+          <th>Schedule</th>
+          <th>Length</th>
+          <th>link</th>
+          <th>Reminder</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of contests">
+          <td><span [ngStyle]="{ 'background-color': getColor(c.site) }" class="site-name">{{ c.site }}</span></td>
+          <td>{{ c.title }}</td>
+          <td>{{ c.schedule }}</td>
+          <td>{{ c.length ? (c.length + ' hrs') : '-' }}</td>
+          <td (click)="getContestLink(c.link)"><span [ngClass]="{ 'custom-link': c.link ? true : false }">{{ c.link ? 'Goto Contest' : 'Unavailable' }}</span></td>
+          <td><span class="ml-10" *ngIf="isValidDate(c.schedule)" (click)="reminder(c.site, c.title, c.link, c.schedule, c.length)"><i class="fa fa-plus custom-plus"></i></span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

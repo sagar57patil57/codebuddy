@@ -1,0 +1,27 @@
+<div class="container-mr">
+  <form [formGroup]="form" (submit)="onSavePost()" *ngIf="!isLoading">
+    <mat-form-field>
+      <input matInput type="text" formControlName="title" placeholder="Post Title">
+      <mat-error *ngIf="form.get('title').invalid">Please enter a post title.</mat-error>
+    </mat-form-field>
+    <!--<div>
+      <button mat-stroked-button type="button" (click)="filePicker.click()">Pick Image</button>
+      <input type="file" #filePicker (change)="onImagePicked($event)">
+    </div>
+    <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
+      <img [src]="imagePreview" [alt]="form.value.title">
+    </div>-->
+    <ckeditor
+      [(ngModel)]="enteredContent"
+      [ngModelOptions]="{standalone: true}"
+      [config]="{uiColor: '#ffffff'}"
+      [readonly]="false"
+      (change)="onChange($event)"
+    ></ckeditor>
+    <button class="btn btn-danger" type="submit">{{ isLoading ? 'Saving Post' : 'Save Post' }}
+      <div class="spinner-border text-light" style="width: 1rem; height: 1rem;" role="status" *ngIf="isLoading">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </button>
+  </form>
+</div>
